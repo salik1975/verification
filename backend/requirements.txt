@@ -1,0 +1,39 @@
+# Core FastAPI dependencies
+fastapi
+uvicorn[standard]
+
+# Database dependencies
+sqlalchemy
+alembic
+pyodbc
+
+# Data validation and settings
+pydantic[email]
+pydantic-settings
+
+# Environment variables
+python-dotenv
+
+# Security
+passlib[bcrypt]
+python-jose[cryptography]
+
+# HTTP client for testing
+httpx
+
+# Development and testing
+pytest
+pytest-asyncio
+
+# Additional utilities
+python-multipart
+
+twilio
+
+pikepdf
+
+PyPDF2
+
+numpy
+
+scikit-learn

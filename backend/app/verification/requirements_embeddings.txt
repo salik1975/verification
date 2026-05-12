@@ -1,0 +1,6 @@
+# Optional requirements for ultra-fast OFAC matching using embeddings
+# Install with: pip install -r requirements_embeddings.txt
+
+sentence-transformers>=2.2.0
+numpy>=1.21.0
+torch>=1.9.0

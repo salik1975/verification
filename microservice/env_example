@@ -1,0 +1,104 @@
+# Rename this file as .env for use
+
+# Azure Document Intelligence Configuration
+AZURE_DOCUMENT_AI_KEY=<azure document intelligence key>
+AZURE_DOCUMENT_AI_ENDPOINT=<azure document intelligence endpoint>
+
+# FFmpeg Configuration
+# Path to FFmpeg binaries directory (the folder containing ffmpeg.exe)
+# Examples:
+#   Windows: C:\ffmpeg\bin
+#   Linux/Mac: /usr/bin (or leave empty if ffmpeg is in system PATH)
+FFMPEG_PATH=
+
+# Face Matching Configuration
+# Threshold for face matching (lower = stricter, higher = more lenient)
+# Default: 0.6 (for Facenet512 model with cosine distance metric)
+# Typical range: 0.3 - 0.8
+# Lower values require faces to be more similar to match
+FACE_MATCH_THRESHOLD=0.75
+
+# Phrase Matching Configuration
+# Threshold for phrase matching using Levenshtein distance (lower = stricter, higher = more lenient)
+# Default: 0.1 (10% difference allowed)
+# Typical range: 0.05 - 0.3
+# Lower values require spoken phrase to be more similar to expected phrase
+# This is the maximum allowed ratio of Levenshtein distance to phrase length
+PHRASE_MATCH_THRESHOLD=0.1
+
+# Head Movement Detection Configuration
+# Threshold for head movement detection during liveness check (lower = stricter, higher = more lenient)
+# Default: 0.05 (5% horizontal nose movement required)
+# Typical range: 0.03 - 0.08
+# This measures the range of horizontal nose position as a fraction of frame width
+# Lower values require less head movement to pass liveness check
+# Higher values require more pronounced head movement
+LIVENESS_HEAD_MOVEMENT_THRESHOLD=0.05
+
+# Vertical Movement Detection Configuration
+# Threshold for vertical head movement (nodding) detection during liveness check
+# Default: 0.04 (4% vertical nose movement required)
+# Typical range: 0.03 - 0.06
+# This measures the range of vertical nose position as a fraction of frame height
+# Lower values require less head movement (easier to pass)
+# Higher values require more pronounced nodding movement
+LIVENESS_VERTICAL_MOVEMENT_THRESHOLD=0.04
+
+# Face Verification Parallel Processing Configuration
+# Number of worker threads for parallel face verification
+# Default: 2 (recommended for most systems)
+# Typical range: 1 - 4
+# Higher values allow more simultaneous verifications but may cause resource contention
+# Lower values are more stable but slower
+# Set to 1 to disable parallel processing (sequential processing)
+FACE_VERIFY_WORKERS=3
+
+# Liveness Check Parallel Processing
+# Run face extraction and audio transcription in parallel during liveness check
+# Default: true (enabled for better performance)
+# Set to false for sequential processing (more stable on low-resource systems)
+# Parallel processing can reduce liveness check time by 30-50%
+LIVENESS_PARALLEL_PROCESSING=true
+
+# ============================================================================
+# FACE RECOGNITION MODEL CONFIGURATION
+# ============================================================================
+
+# Face Recognition Model
+# Determines which DeepFace model to use for face verification
+# Default: SFace (fastest model with excellent accuracy based on benchmarks)
+#
+# Available Models (ranked by speed with OpenCV detector):
+#   SFace          - 220ms avg (RECOMMENDED: Best speed/accuracy balance)
+#   DeepID         - 198ms avg (Fastest but may be too sensitive)
+#   OpenFace       - 503ms avg (Fast with good accuracy)
+#   ArcFace        - 966ms avg (Slower but very accurate)
+#   GhostFaceNet   - 1026ms avg (Slower, good for edge devices)
+#   Facenet512     - 1221ms avg (Previous default, slower but accurate)
+#   Facenet        - 1346ms avg (Slower than Facenet512)
+#   VGG-Face       - 1709ms avg (Slowest, very accurate)
+#   DeepFace       - NOT SUPPORTED (requires TensorFlow < 2.12)
+#
+# Notes:
+# - SFace provides 5.5x speed improvement over Facenet512
+# - Lower time = faster verification (better user experience)
+# - All models use cosine distance metric (lower distance = more similar faces)
+FACE_RECOGNITION_MODEL=SFace
+
+# Face Detector Backend
+# Determines which detector to use for finding faces in images
+# Default: opencv (fastest and most compatible)
+#
+# Available Detectors:
+#   opencv       - RECOMMENDED: Fastest, works on all systems, no GPU required
+#   retinaface   - Most accurate but 10-20x slower, benefits from GPU
+#   ssd          - Moderate speed and accuracy
+#   mtcnn        - Good accuracy, moderate speed
+#   dlib         - Good for frontal faces, requires dlib installation
+#   mediapipe    - Fast and accurate, good for real-time
+#
+# When to use retinaface:
+# - You have a GPU-enabled system (CUDA support)
+# - Accuracy is more important than speed
+# - Processing difficult lighting conditions or angles
+FACE_DETECTOR_BACKEND=opencv

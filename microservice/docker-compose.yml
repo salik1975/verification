@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  microservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acufi-microservice
+    ports:
+      - "3206:3206"
+    environment:
+      - AZURE_DOCUMENT_AI_KEY=${AZURE_DOCUMENT_AI_KEY}
+      - AZURE_DOCUMENT_AI_ENDPOINT=${AZURE_DOCUMENT_AI_ENDPOINT}
+      - FFMPEG_PATH=/usr/bin
+    volumes:
+      - ./.env:/app/.env
+    restart: unless-stopped
+

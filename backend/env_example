@@ -1,0 +1,28 @@
+# Rename this file as .env for use
+
+# Database Configuration
+DB_SERVER=162.198.105.213,1433
+DB_NAME=AcuFi
+DB_USER=sa
+DB_PASSWORD=
+
+# Database URL for SQLAlchemy
+DATABASE_URL=mssql+pyodbc://sa:<password>@162.198.105.213,1433/AcuFi?driver=ODBC+Driver+18+for+SQL+Server&TrustServerCertificate=yes
+
+# Application Settings
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# API Settings
+API_V1_STR=/api/v1
+PROJECT_NAME=AcuFi Backend API
+
+
+MICROSERVICE_URL=<Microservice base URL>
+
+SENDER_EMAIL=<email_id>
+SENDER_EMAIL_APP_PASS=<app word>
+
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_NUMBER=
